@@ -10,9 +10,8 @@ const symboles = document.getElementById("Symboles");
 const savedPasswordsContainer = document.querySelector(".grid.grid-cols-1");
 const stats = document.querySelectorAll(".grid.grid-cols-3 span.text-blue-600");
 
-
 const progressBar = document.querySelector('[role="progressbar"] > div');
-const strengthText = document.getElementById("strengthText"); 
+const strengthText = document.getElementById("strengthText");
 
 const CHARS = {
   Majuscules: "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
@@ -24,13 +23,12 @@ const CHARS = {
 let savedPasswords = [];
 
 rangeInput.addEventListener("input", () => {
-  lengthDisplay.textContent = `${rangeInput.value} caractères`;
+  lengthDisplay.textContent = `${rangeInput.value} characters`;
 });
-
 
 function generatePassword() {
   if (rangeInput.value < 4) {
-    alert("La longueur minimale est de 4 caractères !");
+    alert("Minimum length is 4 characters!");
     return "";
   }
 
@@ -41,7 +39,7 @@ function generatePassword() {
   if (symboles.checked) characters += CHARS.Symboles;
 
   if (characters === "") {
-    alert("Veuillez sélectionner au moins une option !");
+    alert("Please select at least one option!");
     return "";
   }
 
@@ -52,7 +50,6 @@ function generatePassword() {
   }
   return password;
 }
-
 
 function calculateStrength(password) {
   let score = 0;
@@ -72,50 +69,53 @@ function calculateStrength(password) {
   return Math.round(score);
 }
 
-
 function updateProgressBar(strength) {
   progressBar.style.width = strength + "%";
 
   let color = "red";
-  let label = "Faible";
+  let label = "Weak";
   if (strength > 70) {
     color = "green";
-    label = "Fort";
+    label = "Strong";
   } else if (strength > 40) {
     color = "orange";
-    label = "Moyen";
+    label = "Medium";
   }
 
   progressBar.style.backgroundColor = color;
-
-
   strengthText.textContent = `${label} (${strength}/100)`;
   strengthText.style.color = color;
 }
 
 function copyPassword(text) {
   navigator.clipboard.writeText(text).then(() => {
-    alert("Mot de passe copié !");
+    alert("Password copied!");
   });
 }
 
-
 function updateStats() {
   const total = savedPasswords.length;
-  const forts = savedPasswords.filter(p => calculateStrength(p.password) > 70).length;
-  const longueurMoyenne =
+  const strong = savedPasswords.filter(p => calculateStrength(p.password) > 70).length;
+  const avgLength =
     total > 0
       ? Math.round(savedPasswords.reduce((acc, p) => acc + p.password.length, 0) / total)
       : 0;
 
   stats[0].textContent = total;
-  stats[1].textContent = forts;
-  stats[2].textContent = longueurMoyenne;
+  stats[1].textContent = strong;
+  stats[2].textContent = avgLength;
 }
-
 
 function renderPasswords() {
   savedPasswordsContainer.innerHTML = "";
+
+  if (savedPasswords.length === 0) {
+    const noPasswordMsg = document.createElement("p");
+    noPasswordMsg.textContent = "No saved passwords";
+    noPasswordMsg.className = "text-center text-gray-500 font-semibold";
+    savedPasswordsContainer.appendChild(noPasswordMsg);
+    return;
+  }
 
   savedPasswords.forEach((item, index) => {
     let color = "red";
@@ -123,21 +123,20 @@ function renderPasswords() {
     else if (item.strength > 40) color = "orange";
 
     const div = document.createElement("div");
-    div.className =
-      "bg-white rounded-xl flex items-start justify-between p-4 shadow gap-4";
+    div.className = "bg-white rounded-xl flex items-start justify-between p-4 shadow gap-4";
 
     div.innerHTML = `
       <div>
         <span class="text font-mono">${item.password}</span>
         <span class="text block text-gray-500">
-          Créé le ${item.date} <br>
-          Force: ${item.strength}/100 
+          Created on ${item.date} <br>
+          Strength: ${item.strength}/100 
           <span style="display:inline-block;width:10px;height:10px;background-color:${color};border-radius:50%;margin-left:5px;"></span>
         </span>
       </div>
       <div class="flex flex-col gap-2">
-        <button class="bg-green-500 text-white rounded-xl px-3 py-2">Copier</button>
-        <button class="bg-red-500 text-white rounded-xl px-3 py-2">Supprimer</button>
+        <button class="bg-green-500 text-white rounded-xl px-3 py-2">Copy</button>
+        <button class="bg-red-500 text-white rounded-xl px-3 py-2">Delete</button>
       </div>
     `;
 
@@ -158,14 +157,14 @@ function renderPasswords() {
 generateBtn.addEventListener("click", () => {
   const website = document.getElementById("website").value.trim();
   if (website === "") {
-    alert("Veuillez entrer le nom du site web !");
+    alert("Please enter the website name!");
     return;
   }
 
   const password = generatePassword();
   if (password !== "") {
     const strength = calculateStrength(password);
-    const creationDate = new Date().toLocaleDateString("fr-FR");
+    const creationDate = new Date().toLocaleDateString("en-GB");
 
     savedPasswords.push({
       password,
@@ -182,5 +181,11 @@ generateBtn.addEventListener("click", () => {
 
 rangeInput.min = 4;
 rangeInput.value = 17;
-lengthDisplay.textContent = `${rangeInput.value} caractères`;
+lengthDisplay.textContent = `${rangeInput.value} characters`;
 updateProgressBar(0);
+renderPasswords();
+
+
+
+
+

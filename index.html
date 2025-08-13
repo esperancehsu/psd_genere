@@ -3,115 +3,90 @@
   <head>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-    <link rel="stylesheet" href="./src/style.css"  />
+    <link rel="stylesheet" href="./src/style.css" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Password generator</title>
+    <title>Password Generator</title>
   </head>
   <body>
     <div
       id="app"
-      class="bg-gradient-to-r from-blue-600 to-violet-600 h-full  flex justify-center items-center" >
-   
+      class="bg-gradient-to-r from-blue-600 to-violet-600 h-full flex justify-center items-center"
+    >
       <div class="bg-white rounded-2xl m-5 shadow-2xl p-5 sm:p-10 w-full sm:w-4/5 md:w-3/5 lg:w-2/5">
-
-      <h1 class="font-bold text-2xl">🔐Générateur de mots de passe</h1><br>
-
-      <div>
-        <label class="font-semibold">Site web: </label>
-        <input type="text" id="website" class="border-2 border-gray-200 rounded-xl p-2 w-full" placeholder="ex:www.gmail.com">
-      
-      </div>
-
-      <div>
-        <label class="font-semibold text-xl">Longueur du mot de passe: </label>
-        <input type="range" id="range" class="border-2 border-gray-200 rounded-xl p-2 w-full">
-        <span>17caractères</span>
-      </div>
-
-      <div>
-        <label class="font-semibold">Options: </label>
-        <div class="flex flex-wrap gap-y-5 gap-x-10 pb-2 text-lg border-gray-200 rounded-xl">
-          <div>
-            <input type="checkbox" id="Majuscules">
-            <label for="Majuscules">Majuscules(A-Z)</label>
-          </div>
-
-          <div>
-            <input type="checkbox" id="Minuscules">
-            <label for="Minuscules">Minuscules(a-z)</label>
-          </div>
-
-          <div>
-            <input type="checkbox" id="Chiffres">
-            <label for="Chiffres">Chiffres(0-9)</label>
-          </div>
-
-          <div>
-            <input type="checkbox" id="Symboles">
-            <label for="Symboles">Symboles(!@#$%)</label>
-          </div>
-        </div>
-     
+        <h1 class="font-bold text-2xl">🔐 Password Generator</h1><br />
 
         <div>
-          <button id="generate" class="bg-gradient-to-r from-blue-600 to-violet-600 text-white w- shadow-2xl rounded-xl p-2 my-3.5">Générer un mot de passe</button>
+          <label class="font-semibold">Website:</label>
+          <input type="text" id="website" class="border-2 border-gray-200 rounded-xl p-2 w-full" placeholder="e.g. www.gmail.com" />
         </div>
 
-        <div class="flex w-full h-1.5 bg-gray-200 rounded-full overflow-hidden dark:bg-neutral-700" role="progressbar" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
-          <div class="flex flex-col justify-center rounded-full overflow-hidden bg-blue-600 text-xs text-white text-center whitespace-nowrap transition duration-500 dark:bg-blue-500" style="width: 25%"></div>
+        <div>
+          <label class="font-semibold text-xl">Password Length:</label>
+          <input type="range" id="range" class="border-2 border-gray-200 rounded-xl p-2 w-full" />
+          <span>17 characters</span>
         </div>
-        <p id="strengthText" class="mt-1 font-bold"></p>
 
+        <div>
+          <label class="font-semibold">Options:</label>
+          <div class="flex flex-wrap gap-y-5 gap-x-10 pb-2 text-lg border-gray-200 rounded-xl">
+            <div>
+              <input type="checkbox" id="Majuscules" />
+              <label for="Majuscules">Uppercase (A-Z)</label>
+            </div>
 
-      </div>
-      <div class="flex-justify-between items-center mt-5 bg-gray-200 p-8 rounded-xl">
-        <span>
-          <h2 class="font-semibold">Mots de passe sauvegardés</h2>
-        </span>
-      <div>
+            <div>
+              <input type="checkbox" id="Minuscules" />
+              <label for="Minuscules">Lowercase (a-z)</label>
+            </div>
 
-      <div class="grid grid-cols-3 gap-4 w-full mt-2">
-        <div class=" bg-white h-15 rounded-xl flex flex-col shadow-xl items-center justify-center">
-          <span class="text-blue-600 text-xl">0</span>
-          <span>Total</span>
-        </div>
-         <div class=" bg-white h-15 rounded-xl flex flex-col shadow-xl items-center justify-center">
-          <span class="text-blue-600 text-xl">0</span>
-          <span>Forts</span>
-        </div>
-         <div class=" bg-white h-15 rounded-xl flex flex-col shadow-xl items-center justify-center">
-          <span class="text-blue-600 text-xl">0</span>
-          <span>Longueur moy.</span>
-        </div>
-      </div>
+            <div>
+              <input type="checkbox" id="Chiffres" />
+              <label for="Chiffres">Numbers (0-9)</label>
+            </div>
 
-      <div class="grid grid-cols-1 gap-6 w-full mt-12">
-      
-        <div class=" bg-white h-20 rounded-xl flex items-center justify-between" >
-          <div>
-          <span class="text">GGKKSDHSD</span>
-          <span class="text">DKNNE</span>
-        </div>
-          <div class=flex flex-col gap-2>
-            <button id="generate" class="bg-green-500 text-white rounded-xl px-3 py-2">Copier</button>
-            <button id="generate" class="bg-red-500 text-white rounded-xl px-3 py-2">Supprimer</button>
+            <div>
+              <input type="checkbox" id="Symboles" />
+              <label for="Symboles">Symbols (!@#$%)</label>
+            </div>
           </div>
 
-          <div class="flex flex-col gap-2">
+          <div>
+            <button id="generate" class="bg-gradient-to-r from-blue-600 to-violet-600 text-white shadow-2xl rounded-xl p-2 my-3.5">Generate Password</button>
+          </div>
 
-</div>
+          <div class="flex w-full h-1.5 bg-gray-200 rounded-full overflow-hidden dark:bg-neutral-700" role="progressbar" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
+            <div class="flex flex-col justify-center rounded-full overflow-hidden bg-blue-600 text-xs text-white text-center whitespace-nowrap transition duration-500 dark:bg-blue-500" style="width: 25%"></div>
+          </div>
+          <p id="strengthText" class="mt-1 font-bold"></p>
         </div>
 
-       
+        <div class="flex-justify-between items-center mt-5 bg-gray-200 p-8 rounded-xl">
+          <span>
+            <h2 class="font-semibold">Saved Passwords</h2>
+          </span>
+          <div>
+            <div class="grid grid-cols-3 gap-4 w-full mt-2">
+              <div class="bg-white h-15 rounded-xl flex flex-col shadow-xl items-center justify-center">
+                <span class="text-blue-600 text-xl">0</span>
+                <span>Total</span>
+              </div>
+              <div class="bg-white h-15 rounded-xl flex flex-col shadow-xl items-center justify-center">
+                <span class="text-blue-600 text-xl">0</span>
+                <span>Strong</span>
+              </div>
+              <div class="bg-white h-15 rounded-xl flex flex-col shadow-xl items-center justify-center">
+                <span class="text-blue-600 text-xl">0</span>
+                <span>Avg. Length</span>
+              </div>
+            </div>
 
-        
-
-        
+            <div class="grid grid-cols-1 gap-6 w-full mt-12">
+             
+            </div>
+          </div>
+        </div>
       </div>
-    
-  
     </div>
-  </div>
     <script type="module" src="./src/main.js"></script>
   </body>
 </html>
